@@ -133,13 +133,15 @@ function play(){clearInterval(t);if(playing)t=setInterval(()=>go(i+1),5500);docu
 document.getElementById('pv').onclick=()=>{go(i-1);play()};document.getElementById('nx').onclick=()=>{go(i+1);play()};
 document.getElementById('pp').onclick=()=>{playing=!playing;play()};db.forEach((d,k)=>d.onclick=()=>{go(k);play()});
 go(0);play();
-const f=document.getElementById('qf'),out=document.getElementById('qout');
-f.addEventListener('submit',async e=>{e.preventDefault();const d=new FormData(f);
-if(!d.get('name')||!d.get('phone')){out.textContent='Please add your name and phone number.';return}
+const ERR='Sorry, the form did not go through. Please call or text (469) 394-3276 or email hlhwfloorremo@gmail.com.';
+function wire(id,outId,check,thanks){const f=document.getElementById(id),out=document.getElementById(outId);
+f.addEventListener('submit',async e=>{e.preventDefault();const d=new FormData(f),bad=check(d);
+if(bad){out.textContent=bad;return}
 const btn=f.querySelector('button[type=submit]');btn.disabled=true;out.textContent='Sending...';
 try{const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(d).toString()});
-if(!r.ok)throw 0;f.reset();out.textContent='Thank you! Hermelindo will reach out soon to schedule your free walk-through.'}
-catch(err){out.textContent='Sorry, the form did not go through. Please call or text (469) 394-3276 or email hlhwfloorremo@gmail.com.'}
-btn.disabled=false});
+if(!r.ok)throw 0;f.reset();out.textContent=thanks}
+catch(err){out.textContent=ERR}
+btn.disabled=false})}
+wire('qf','qout',d=>(!d.get('name')||!d.get('phone'))&&'Please add your name and phone number.','Thank you! Hermelindo will reach out soon to schedule your free walk-through.');
 }
 </script></body></html>
