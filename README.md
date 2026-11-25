@@ -6,4 +6,4 @@ Website for HLH Flooring & Design LLC. Rooted in Dallas. Growing across Texas.
 - `favicon.svg` — browser tab icon
 - `img/` — project photos, the owner photo and the link-sharing preview image (`og.jpg`)
 
-The estimate form is set up for Netlify Forms (form name: `estimate`).
+The estimate form (form name: `estimate`) and the general contact form (form name: `contact`) are set up for Netlify Forms.
